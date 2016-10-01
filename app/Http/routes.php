@@ -10,10 +10,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('blocked', function(){
-	return ['status' => false ]; 
-});
+Route::group(['middleware' => 'cors'], function(){
+	Route::get('blocked', function(){
+		return ['status' => false ]; 
+	});
+}); 
 
 
 
@@ -29,7 +30,6 @@ Route::group(['prefix' => 'adm'], function(){
 
 //Proteger pela camada de segurnaça da session mais tarde: 
 Route::group(['middleware' => 'adm_auth'], function(){
-
 	Route::get('/', function(){
 		return view('index'); 
 	}); 
